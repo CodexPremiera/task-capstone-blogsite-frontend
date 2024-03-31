@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply m-0 p-0 box-border;
+}
+
+body {
+  @apply font-texts;
+  @apply font-texts relative;
+}
+
+.size {
+  @apply w-[95%] md:w-[90%] mx-auto;
+}
+
+.w-standard {
+  @apply mx-6 md:mx-12 lg:mx-16 xl:mx-auto max-w-[1200px];
+}
+
+.max-w-actions {
+  max-width: calc(100% - 160px);
+}
+
+.shadows {
+  box-shadow:rgba(0, 0, 0, 0.15) 0 2px 10px;
+}
+
+.btn-black {
+  @apply text-white rounded-full px-4 py-2 text-sm font-medium bg-neutral-900 hover:bg-black;
+}
+
+.btn-green {
+  @apply text-white rounded-full px-4 py-2 text-sm font-medium bg-green_custom hover:bg-green_hover;
+}
