@@ -5,7 +5,7 @@ import { FcGoogle as GoogleLogo } from "react-icons/fc";
 import { MdFacebook as FacebookLogo } from "react-icons/md";
 import { AiOutlineMail as EmailLogo } from "react-icons/ai";
 
-import Modal from "../../../../components/Modal.jsx";
+import Modal from "../../../../components/utils/Modal.jsx";
 import SignIn from "./SignIn.jsx";
 import SignUp from "./SignUp.jsx";
 

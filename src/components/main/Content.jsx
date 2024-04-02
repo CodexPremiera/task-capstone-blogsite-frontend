@@ -1,10 +1,10 @@
 import React from 'react';
-import PostFeed from "./PostFeed.jsx";
-import Aside from "../aside/Aside.jsx";
+import PostFeed from "./content/PostFeed.jsx";
+import Aside from "./aside/Aside.jsx";
 
-import useWindowResize from "../../../hooks/useWindowResize.js";
-import useElementHeight from "../../../hooks/useElementHeight.js";
-import useAsideTop from "../../../hooks/useAsideTop.js";
+import useWindowResize from "../../hooks/useWindowResize.js";
+import useElementHeight from "../../hooks/useElementHeight.js";
+import useAsideTop from "../../hooks/useAsideTop.js";
 
 
 function Content() {

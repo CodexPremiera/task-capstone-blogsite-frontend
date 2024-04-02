@@ -14,7 +14,8 @@ export default {
         green_hover: "#156D12"
       },
       fontFamily: {
-        title: `gt-super, Georgia, Cambria,Times New Roman, Times, serif;`,
+        title: `lucidagrande, Georgia, Cambria,Times New Roman, Times, serif;`,
+        content: `gt-super, Georgia, Cambria,Times New Roman, Times, serif;`,
         texts: `sohne, Helvetica Neue, Helvetica, Arial, sans-serif`,
       },
       gridTemplateColumns: {

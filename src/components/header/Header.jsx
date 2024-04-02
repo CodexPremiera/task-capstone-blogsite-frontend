@@ -6,7 +6,7 @@ import { LiaEditSolid as WriteIcon } from "react-icons/lia";
 import { PiBellLight as NotificationIcon } from "react-icons/pi";
 
 import { Link } from "react-router-dom";
-import Modal from "../Modal.jsx";
+import Modal from "../utils/Modal.jsx";
 import UserModal from "./UserModal.jsx";
 import Search from "./Search.jsx";
 import useHeaderScroll from "../../hooks/useHeaderScroll.jsx";

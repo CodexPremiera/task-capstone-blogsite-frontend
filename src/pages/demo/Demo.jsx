@@ -1,7 +1,7 @@
 import React from "react";
 import Banner from "./main/Banner.jsx";
 import DemoHeader from "./header/DemoHeader.jsx";
-import Content from "../../components/main/content/Content.jsx";
+import Content from "../../components/main/Content.jsx";
 
 const Demo = () => {
   return (

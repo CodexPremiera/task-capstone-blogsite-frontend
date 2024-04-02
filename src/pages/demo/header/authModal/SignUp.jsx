@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {MdKeyboardArrowLeft as GoBackArrow} from "react-icons/md";
-import Input from "../../../../components/Input.jsx";
+import Input from "../../../../components/utils/Input.jsx";
 
 
 const SignUp = ({ setSignReq, setModal }) => {

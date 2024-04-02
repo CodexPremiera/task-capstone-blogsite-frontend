@@ -18,9 +18,6 @@ function Aside() {
   return (
     <aside className={style.container}>
       <Recommendations />
-      <Recommendations />
-      <Recommendations />
-      <Recommendations />
       <Footer />
     </aside>
   );
