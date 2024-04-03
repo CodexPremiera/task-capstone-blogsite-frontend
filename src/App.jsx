@@ -4,6 +4,7 @@ import React from "react";
 import Home from "./pages/home/Home.jsx";
 import sampleUsers from "./data/sampleUsers.js";
 import NotFound from "./pages/notFound/NotFound.jsx";
+import Profile from "./pages/profile/Profile.jsx";
 
 
 function App() {
@@ -14,6 +15,14 @@ function App() {
       path: '/',
       element: (currentUser ? <Home /> : <Demo />),
       errorElement: <NotFound />,
+    },
+    {
+      path: '/profile/:profileId',
+      element: <Profile />,
+    },
+    {
+      path: '*',
+      element: <NotFound />,
     },
   ]);
 

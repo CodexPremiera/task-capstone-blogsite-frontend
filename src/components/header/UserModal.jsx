@@ -9,10 +9,11 @@ import { LiaEditSolid as WriteIcon } from "react-icons/lia";
 //import { Blog } from "../../context/Context.jsx";
 import { Link } from "react-router-dom";
 import sampleUsers from "../../data/sampleUsers.js";
+import {secretEmail} from "../../secretEmail.js";
 
 
 const UserModal = (setModal) => {
-  const { currentUser } = sampleUsers[0]; // or Blog();
+  const currentUser = sampleUsers[0]; // or Blog(); {currentUser}
 
   const modalMenuItems = [
     {
@@ -67,11 +68,10 @@ const UserModal = (setModal) => {
         ))}
       </div>
 
-      <button className={style.sign_out}>
+      <button className={style.sign_out} name={"btn_out"}>
         Sign Out
         <span className="text-sm">
-          {/*{secretEmail(currentUser?.email)}*/}
-          {currentUser?.email}
+          {secretEmail(currentUser?.email)}
         </span>
       </button>
     </section>

@@ -2,7 +2,6 @@ import React from "react";
 
 
 import { Link } from "react-router-dom";
-import useHeaderScroll from "../../hooks/useHeaderScroll.jsx";
 import useElementHeight from "../../hooks/useElementHeight.js";
 import Logo from "../../assets/medium-logo.png";
 

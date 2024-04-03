@@ -9,18 +9,13 @@ import { Link } from "react-router-dom";
 import Modal from "../utils/Modal.jsx";
 import UserModal from "./UserModal.jsx";
 import Search from "./Search.jsx";
-import useHeaderScroll from "../../hooks/useHeaderScroll.jsx";
-import useElementHeight from "../../hooks/useElementHeight.js";
 
 const Header = () => {
   const [modal, setModal] = useState(false);
   const [searchModal, setSearchModal] = useState(false);
 
-  const [headerHeight, headerRef] = useElementHeight();
-  const headerTranslateY = useHeaderScroll(headerHeight);
-
   const style = {
-    header: `border-b border-neutral-200 w-full sticky top-[${headerTranslateY}px] z-50 bg-white transition-all duration-300`,
+    header: `border-b border-neutral-200 w-full fixed z-50 bg-white`,
     header_container: `mx-[1.5rem] h-[57px] flex grow-1 items-center justify-between font-texts`,
 
     left_container: `flex items-center gap-4`,
@@ -42,7 +37,7 @@ const Header = () => {
   }
 
   return (
-    <header className={style.header} ref={headerRef}>
+    <header className={style.header} >
       <div className={style.header_container}>
 
         {/* left side  */}
