@@ -3,13 +3,18 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {MdKeyboardArrowLeft as GoBackArrow} from "react-icons/md";
-import TextInput from "../../../../components/utils/TextInput.jsx";
-import PasswordInput from "../../../../components/utils/PasswordInput.jsx";
+import TextInput from "../../../../components/form/TextInput.jsx";
+import PasswordInput from "../../../../components/form/PasswordInput.jsx";
+import DateInput from "../../../../components/form/DateInput.jsx";
+import DropdownInput from "../../../../components/form/DropdownInput.jsx";
+
+import {genders} from "../../../../data/genders.js";
 
 
-const SignUp = ({ setSignReq, setModal }) => {
+const SignUp = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(" ");
   const [form, setForm] = useState({
     firstname: "",
     lastname: "",
@@ -29,7 +34,11 @@ const SignUp = ({ setSignReq, setModal }) => {
       form.birthdate=== "" || form.gender === "" ||
       form.email === "" || form.password === ""
     ) {
-      console.log("All fields are required");
+      setError("Please fill in all the fields");
+    }
+    else {
+      setError(" ");
+      console.log(form);
     }
   };
 
@@ -38,11 +47,12 @@ const SignUp = ({ setSignReq, setModal }) => {
     container: `max-w-[60ch] mx-auto text-center`,
     h2: `text-4xl font-title pb-6`,
     subtitle: `mx-auto pb-12 max-w-[48ch]`,
-    form: `flex flex-col gap-6`,
+    form: `flex flex-col gap-4`,
     user_inputs: `grid grid-cols-[9fr_4fr] gap-x-8 gap-y-5 mb-4`,
     btn_continue: `flex grow w-[10rem] justify-center px-6 py-2 mt-4 mx-auto text-sm rounded-full 
                   bg-gray-900 hover:bg-gray-950 text-white ${loading ? "opacity-50 pointer-events-none" : ""}`,
-    btn_go_back: `mt-5 text-sm text-green-600 hover:text-green-700 flex items-center mx-auto`
+    error_box: `flex mx-auto h-4 mt-3 items-center justify-center`,
+    error: `text-sm font-medium text-center text-red-500`
   }
 
   return (
@@ -54,13 +64,13 @@ const SignUp = ({ setSignReq, setModal }) => {
 
       <form onSubmit={handleSubmit}
             className={style.form}>
-        
+
         <div className={style.user_inputs}>
           <TextInput form={form} setForm={setForm} type="firstname" title="firstname"/>
-          <TextInput form={form} setForm={setForm} type="birthdate" title="birthdate"/>
-          
+          <DateInput form={form} setForm={setForm} title="birthdate"/>
+
           <TextInput form={form} setForm={setForm} type="lastname" title="lastname"/>
-          <TextInput form={form} setForm={setForm} type="gender" title="gender"/>
+          <DropdownInput form={form} setForm={setForm} type="gender" title="gender" menu={genders}/>
         </div>
 
         <TextInput form={form} setForm={setForm} type="username" title="username"/>
@@ -72,12 +82,9 @@ const SignUp = ({ setSignReq, setModal }) => {
         </button>
       </form>
 
-      <button
-        onClick={() => setSignReq("")}
-        className={style.btn_go_back}>
-        <GoBackArrow/>
-        All Sign-up Options
-      </button>
+      <div className={style.error_box}>
+        <span className={style.error}>{error}</span>
+      </div>
     </div>
   );
 }

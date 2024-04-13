@@ -4,12 +4,12 @@ import React, { useState } from "react";
 // import { auth } from "../../../../firebase/firebase.js";
 import { useNavigate } from "react-router-dom";
 
-import {MdKeyboardArrowLeft as GoBackArrow} from "react-icons/md";
-import TextInput from "../../../../components/utils/TextInput.jsx";
-import PasswordInput from "../../../../components/utils/PasswordInput.jsx";
+import TextInput from "../../../../components/form/TextInput.jsx";
+import PasswordInput from "../../../../components/form/PasswordInput.jsx";
 
-const SignIn = ({setSignReq}) => {
+const SignIn = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState(" ");
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -19,10 +19,11 @@ const SignIn = ({setSignReq}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      form.email === "" || form.password === ""
-    ) {
-      console.log("All fields are required!!!");
+    if ( form.email === "" || form.password === "" ) {
+      setError("Please fill in all the fields");
+    }
+    else {
+      setError(" ");
     }
   };
 
@@ -30,10 +31,12 @@ const SignIn = ({setSignReq}) => {
     container: `max-w-[60ch] mx-auto text-center`,
     h2: `text-4xl font-title pb-6`,
     subtitle: `mx-auto pb-12 max-w-[48ch]`,
-    form: `flex flex-col gap-6`,
+    form: `flex flex-col gap-4`,
     btn_continue: `flex grow w-[10rem] justify-center px-6 py-2 mt-4 text-sm rounded-full 
                     bg-gray-900 hover:bg-gray-950 text-white mx-auto ${loading ? "opacity-50 pointer-events-none" : ""}`,
-    btn_go_back: `mt-5 text-sm text-green-600 hover:text-green-700 flex items-center mx-auto`
+    btn_go_back: `mt-3 text-sm text-green-600 hover:text-green-700 flex items-center mx-auto`,
+    error_box: `flex mx-auto h-4 mt-3 items-center justify-center`,
+    error: `text-sm font-medium text-center text-red-500`,
   }
 
   return (
@@ -44,7 +47,7 @@ const SignIn = ({setSignReq}) => {
       </p>
 
       <form className={style.form}
-            onSubmit={handleSubmit} >
+            onSubmit={handleSubmit}>
         <TextInput form={form} setForm={setForm} type="email" title="email"/>
         <PasswordInput form={form} setForm={setForm} title="password"/>
 
@@ -53,12 +56,9 @@ const SignIn = ({setSignReq}) => {
         </button>
       </form>
 
-      <button
-        onClick={() => setSignReq("")}
-        className={style.btn_go_back}>
-        <GoBackArrow/>
-        All Sign-in Options
-      </button>
+      <div className={style.error_box}>
+        <span className={style.error}>{error}</span>
+      </div>
     </div>
   );
 }

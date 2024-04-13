@@ -16,10 +16,10 @@ const PasswordInput = ({title, form, setForm }) => {
   const styles = {
     container: `flex flex-col max-w-[64ch] `,
     input_area: `flex w-[100%] items-end border-b border-black px-1.5 pb-[0.3rem]`,
-    input: `outline-none w-full h-8 bg-transparent font-texts text-[1rem]
-                    placeholder:text-neutral-400 placeholder:text-[1rem]`,
+    input: `outline-none w-full h-8 bg-transparent font-texts text-[1rem] font-title
+            placeholder:text-neutral-400 placeholder:text-[1rem]`,
     visibilityIcon: `flex mb-1 cursor-pointer`,
-    label: `text-neutral-900 text-[0.8rem] flex px-1.5 pt-[0.2rem]`,
+    label: `flex text-neutral-600 text-[0.72rem] capitalize px-1.5 pt-[0.2rem]`,
   }
 
   return (
