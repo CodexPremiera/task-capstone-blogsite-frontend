@@ -5,7 +5,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {MdKeyboardArrowLeft as GoBackArrow} from "react-icons/md";
-import Input from "../../../../components/utils/Input.jsx";
+import TextInput from "../../../../components/utils/TextInput.jsx";
+import PasswordInput from "../../../../components/utils/PasswordInput.jsx";
 
 const SignIn = ({setSignReq}) => {
   const navigate = useNavigate();
@@ -23,15 +24,13 @@ const SignIn = ({setSignReq}) => {
     ) {
       console.log("All fields are required!!!");
     }
-
-    setLoading(false);
   };
 
   const style = {
-    container: `size text-center`,
-    h2: `text-3xl font-title`,
-    subtitle: `max-w-[54ch] mx-auto py-[3rem]`,
-    form: `flex flex-col gap-4`,
+    container: `max-w-[60ch] mx-auto text-center`,
+    h2: `text-4xl font-title pb-6`,
+    subtitle: `mx-auto pb-12 max-w-[48ch]`,
+    form: `flex flex-col gap-6`,
     btn_continue: `flex grow w-[10rem] justify-center px-6 py-2 mt-4 text-sm rounded-full 
                     bg-gray-900 hover:bg-gray-950 text-white mx-auto ${loading ? "opacity-50 pointer-events-none" : ""}`,
     btn_go_back: `mt-5 text-sm text-green-600 hover:text-green-700 flex items-center mx-auto`
@@ -41,13 +40,13 @@ const SignIn = ({setSignReq}) => {
     <div className={style.container}>
       <h2 className={style.h2}>Sign in with email</h2>
       <p className={style.subtitle}>
-        Enter the email address associated with your account, and we’ll send a magic link to your inbox.
+        Enter your account and resume making your stories with us.
       </p>
 
       <form className={style.form}
             onSubmit={handleSubmit} >
-        <Input form={form} setForm={setForm} type="email" title="email"/>
-        <Input form={form} setForm={setForm} type="password" title="password"/>
+        <TextInput form={form} setForm={setForm} type="email" title="email"/>
+        <PasswordInput form={form} setForm={setForm} title="password"/>
 
         <button className={style.btn_continue}>
           Continue

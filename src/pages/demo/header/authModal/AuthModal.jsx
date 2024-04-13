@@ -20,7 +20,7 @@ const AuthModal = ({modal, setModal, createUser, setCreateUser, signReq, setSign
                 w-full h-full md:w-[640px] md:h-fit top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] 
                 ${hidden} transition-all duration-500`,
     btn_exit: `absolute top-[2rem] right-[2rem] text-2xl hover:opacity-50`,
-    content: `flex flex-col justify-center items-center gap-[3rem]`,
+    content: `flex flex-col justify-center items-center gap-[2rem]`,
     h2: `text-2xl font-title`,
     list_accounts: `flex flex-col gap-3 w-fit`,
     btn_account: `text-xl`,
@@ -78,8 +78,7 @@ const AuthModal = ({modal, setModal, createUser, setCreateUser, signReq, setSign
 
           ) : null}
           <p className={style.disclaimer}>
-            Click “Sign In” to agree to Medium’s Terms of Service and acknowledge that Medium’s Privacy Policy applies
-            to you.
+            Click “Sign In” to agree to Medium’s Terms of Service.
           </p>
         </div>
       </div>

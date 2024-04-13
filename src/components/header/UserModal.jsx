@@ -13,7 +13,7 @@ import {secretEmail} from "../../secretEmail.js";
 
 
 const UserModal = (setModal) => {
-  const currentUser = sampleUsers[0]; // or Blog(); {currentUser}
+  const currentUser = sampleUsers[1]; // or Blog(); {currentUser}
 
   const modalMenuItems = [
     {

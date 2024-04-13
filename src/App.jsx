@@ -8,7 +8,7 @@ import Profile from "./pages/profile/Profile.jsx";
 
 
 function App() {
-  const currentUser = /*sampleUsers[0];*/ true;
+  const currentUser = sampleUsers[-1];
 
   const router = createBrowserRouter([
     {

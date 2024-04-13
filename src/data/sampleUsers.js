@@ -7,8 +7,8 @@ const sampleUsers = [
   },
   {
     uid: 2,
-    email: "janedoe@email.com",
-    name: "Jane Doe",
+    email: "adalovlace@email.com",
+    name: "Ada Lovelace",
     // Add any other properties you want to include for the user
   },
 ];
