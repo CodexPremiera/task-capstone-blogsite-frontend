@@ -10,16 +10,17 @@ import { LiaEditSolid as WriteIcon } from "react-icons/lia";
 import { Link } from "react-router-dom";
 import sampleUsers from "../../data/sampleUsers.js";
 import {secretEmail} from "../../secretEmail.js";
+import {useCurrentUser} from "../../context/UserContext.jsx";
 
 
 const UserModal = (setModal) => {
-  const currentUser = sampleUsers[1]; // or Blog(); {currentUser}
+  const currentUser = useCurrentUser();
 
   const modalMenuItems = [
     {
       title: "Profile",
       icon: <ProfileIcon />,
-      path: `/profile/${currentUser?.uid}`,
+      path: `/profile/${currentUser.uid}`,
     },
     {
       title: "Library",

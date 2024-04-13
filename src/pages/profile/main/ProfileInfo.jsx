@@ -1,9 +1,12 @@
 import React from 'react';
 import ProfilePic from "../../../assets/profile.jpg";
 import CallToAction from "./CallToAction.jsx";
+import {useCurrentUser} from "../../../context/UserContext.jsx";
 
 
 function ProfileInfo() {
+  const currentUser = useCurrentUser();
+
   const style = {
     container: `w-[320px] ml-4 xl:ml-8 mr-4 `,
 
@@ -22,7 +25,9 @@ function ProfileInfo() {
         <img src={`${ProfilePic}`}
              className={style.profile_photo}
              alt="author profile picture"/>
-        <h2 className={style.profile_name}>Ashley Ken Comandao</h2>
+        <h2 className={style.profile_name}>
+          {currentUser.fullName}
+        </h2>
         <span className={style.follower_count}>892 Followers</span>
         <p className={style.bio}>Data Scientist, Computational Physicist and Game Developer.</p>
 

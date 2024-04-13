@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 //import {Blog} from "../../../context/Context.jsx";
+
 import {useParams} from "react-router-dom";
 
 import ProfileHome from "./activities/ProfileHome.jsx";
@@ -10,12 +11,11 @@ import { IoIosMore as MoreIcon } from "react-icons/io";
 import CallToAction from "./CallToAction.jsx";
 import useWindowResize from "../../../hooks/useWindowResize.js";
 import ProfilePic from "../../../assets/profile.jpg";
-//import profile from "../Profile.jsx";
+import {useCurrentUser} from "../../../context/UserContext.jsx";
 
 function ProfileFeed() {
-  // const { allUsers } = Blog();
   const { userId } = useParams();
-  // const getUserData = allUsers.find((user) => user.id === userId);
+  const currentUser = useCurrentUser();
 
   const activities = [
     {
@@ -33,7 +33,6 @@ function ProfileFeed() {
   ];
 
   const [currentActive, setCurrentActive] = useState(activities[0]);
-  // const [modal, setModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const isLaptop = !useWindowResize(1024);
   const isTablet = !useWindowResize(768);
@@ -64,7 +63,7 @@ function ProfileFeed() {
           )}
           <div className={style.profile_user}>
             <h2 className={style.profile_name}>
-              {/*{getUserData?.username}*/} Ashley Ken Comandao
+              {currentUser.fullName}
             </h2>
             {isTablet && (
               <span className={style.follower_count}>892 Followers</span>
