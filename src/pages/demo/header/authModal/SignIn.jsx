@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-// import { signInWithEmailAndPassword } from "firebase/auth";
-// import { auth } from "../../../../firebase/firebase.js";
 import { useNavigate } from "react-router-dom";
 
 import TextInput from "../../../../components/form/TextInput.jsx";
 import PasswordInput from "../../../../components/form/PasswordInput.jsx";
+import {useCurrentUser} from "../../../../context/UserContext.jsx";
+import sampleUsers from "../../../../data/sampleUsers.js";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -14,16 +14,24 @@ const SignIn = () => {
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false);
+  const {currentUser, setCurrentUser } = useCurrentUser();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // check if any field is empty
     if ( form.email === "" || form.password === "" ) {
       setError("Please fill in all the fields");
+      return;
     }
-    else {
-      setError(" ");
+
+    // check if email and password are correct
+    setError(" ");
+    try {
+      setCurrentUser(sampleUsers[1]); // temporary user
+      navigate("/");
+    } catch (error) {
+      setError("Incorrect email or password");
     }
   };
 
@@ -33,7 +41,7 @@ const SignIn = () => {
     subtitle: `mx-auto pb-12 max-w-[48ch]`,
     form: `flex flex-col gap-4`,
     btn_continue: `flex grow w-[10rem] justify-center px-6 py-2 mt-4 text-sm rounded-full 
-                    bg-gray-900 hover:bg-gray-950 text-white mx-auto ${loading ? "opacity-50 pointer-events-none" : ""}`,
+                    bg-gray-900 hover:bg-gray-950 text-white mx-auto`,
     btn_go_back: `mt-3 text-sm text-green-600 hover:text-green-700 flex items-center mx-auto`,
     error_box: `flex mx-auto h-4 mt-3 items-center justify-center`,
     error: `text-sm font-medium text-center text-red-500`,

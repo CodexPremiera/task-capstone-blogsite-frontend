@@ -3,7 +3,7 @@ import { BsEye as ShowIcon } from "react-icons/bs";
 import { BsEyeSlash  as HideIcon } from "react-icons/bs";
 
 const PasswordInput = ({title, form, setForm }) => {
-  const [isPasswordShown, setIsPasswordShown] = useState(true);
+  const [isPasswordShown, setIsPasswordShown] = useState(false);
 
   const showPassword = () => {
     setIsPasswordShown(!isPasswordShown);

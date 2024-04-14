@@ -1,15 +1,9 @@
 import React from 'react';
 
-import useElementHeight from "../../hooks/useElementHeight.js";
-import useAsideTop from "../../hooks/useAsideTop.js";
 import {Link} from "react-router-dom";
 
 
 function NotFoundContent() {
-  const [asideHeight, asideRef] = useElementHeight();
-  const asideTop = useAsideTop(asideHeight, 57);
-
-
   const style = {
     container: `flex flex-col max-w-[640px] md:max-w-[760px] lg:max-w-[960px] px-6 my-12 mx-auto`,
     pageNotFound: `font-text uppercase text-[1.2rem] mb-2`,

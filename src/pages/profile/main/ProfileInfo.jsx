@@ -5,7 +5,7 @@ import {useCurrentUser} from "../../../context/UserContext.jsx";
 
 
 function ProfileInfo() {
-  const currentUser = useCurrentUser();
+  const { currentUser } = useCurrentUser();
 
   const style = {
     container: `w-[320px] ml-4 xl:ml-8 mr-4 `,

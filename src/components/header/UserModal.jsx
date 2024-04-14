@@ -7,14 +7,22 @@ import { HiOutlineChartBar as StatsIcon } from "react-icons/hi";
 import { LiaEditSolid as WriteIcon } from "react-icons/lia";
 
 //import { Blog } from "../../context/Context.jsx";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import sampleUsers from "../../data/sampleUsers.js";
 import {secretEmail} from "../../secretEmail.js";
 import {useCurrentUser} from "../../context/UserContext.jsx";
 
 
-const UserModal = (setModal) => {
-  const currentUser = useCurrentUser();
+const UserModal = ({ setModal }) => {
+  const { currentUser, setCurrentUser } = useCurrentUser();
+
+  // this logs the user out of the entire website
+  const logout = () => {
+    setCurrentUser(null); // Set currentUser to null
+
+    const navigate = useNavigate();
+    navigate("/"); // Redirect to the home page
+  };
 
   const modalMenuItems = [
     {
@@ -69,12 +77,13 @@ const UserModal = (setModal) => {
         ))}
       </div>
 
-      <button className={style.sign_out} name={"btn_out"}>
+      <button className={style.sign_out} name={"btn_out"} onClick={logout}>
         Sign Out
-        <span className="text-sm">
+      </button>
+
+      <span className="text-sm">
           {secretEmail(currentUser?.email)}
         </span>
-      </button>
     </section>
   );
 };
