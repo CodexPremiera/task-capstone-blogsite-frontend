@@ -33,7 +33,7 @@ const PasswordInput = ({title, form, setForm }) => {
         />
         <div className={styles.visibilityIcon} onClick={showPassword}>
           {isPasswordShown ?
-            <HideIcon/> : <ShowIcon/>}
+            <ShowIcon/> : <HideIcon/>}
         </div>
       </div>
       <span className={styles.label}>{title}</span>

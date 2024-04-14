@@ -63,7 +63,7 @@ function ProfileFeed() {
           )}
           <div className={style.profile_user}>
             <h2 className={style.profile_name}>
-              {currentUser.fullName}
+              {currentUser.Firstname} {currentUser.Lastname}
             </h2>
             {isTablet && (
               <span className={style.follower_count}>892 Followers</span>

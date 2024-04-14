@@ -14,13 +14,12 @@ import {useCurrentUser} from "../../context/UserContext.jsx";
 
 
 const UserModal = ({ setModal }) => {
+  const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useCurrentUser();
 
   // this logs the user out of the entire website
   const logout = () => {
     setCurrentUser(null); // Set currentUser to null
-
-    const navigate = useNavigate();
     navigate("/"); // Redirect to the home page
   };
 
@@ -28,7 +27,7 @@ const UserModal = ({ setModal }) => {
     {
       title: "Profile",
       icon: <ProfileIcon />,
-      path: `/profile/${currentUser.uid}`,
+      path: `/profile/${currentUser.ID_UserAccount}`,
     },
     {
       title: "Library",
@@ -82,7 +81,7 @@ const UserModal = ({ setModal }) => {
       </button>
 
       <span className="text-sm">
-          {secretEmail(currentUser?.email)}
+          {secretEmail(currentUser.Email)}
         </span>
     </section>
   );

@@ -10,30 +10,50 @@ import sampleUsers from "../../../../data/sampleUsers.js";
 const SignIn = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(" ");
+  const {currentUser, setCurrentUser } = useCurrentUser();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-  const {currentUser, setCurrentUser } = useCurrentUser();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // check if any field is empty
-    if ( form.email === "" || form.password === "" ) {
+    if (form.email === "" || form.password === "") {
       setError("Please fill in all the fields");
       return;
     }
 
-    // check if email and password are correct
-    setError(" ");
     try {
-      setCurrentUser(sampleUsers[1]); // temporary user
-      navigate("/");
+      const response = await fetch(
+        "http://localhost/capstone-blogsite/login.php",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("User data:", data);
+
+        if (data !== null) {
+          setCurrentUser(data);
+          navigate("/");
+        } else {
+          setError("Invalid email or password");
+        }
+
+        return data;
+      }
     } catch (error) {
-      setError("Incorrect email or password");
+      console.error("Failed to sign in:", error);
+      setError("Failed to sign in");
     }
   };
+
 
   const style = {
     container: `max-w-[60ch] mx-auto text-center`,
@@ -55,11 +75,11 @@ const SignIn = () => {
       </p>
 
       <form className={style.form}
-            onSubmit={handleSubmit}>
+            onSubmit={handleSubmit} >
         <TextInput form={form} setForm={setForm} type="email" title="email"/>
         <PasswordInput form={form} setForm={setForm} title="password"/>
 
-        <button className={style.btn_continue}>
+        <button className={style.btn_continue} name={`btnLogin`}>
           Continue
         </button>
       </form>

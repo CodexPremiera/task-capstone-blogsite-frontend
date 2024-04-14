@@ -11,50 +11,31 @@ function calculateAge(birthdate) {
 
 const sampleUsers = [
   {
-    uid: 1,
-    firstname: `John`,
-    lastname: `Doe`,
-    birthdate: new Date(`2003-05-25`),
-    gender: "male",
+    ID_UserAccount: 1,
+    Firstname: `John`,
+    Lastname: `Doe`,
+    Birthdate: new Date(`2003-05-25`),
+    Gender: "male",
 
-    username: "John Doe",
-    email: "johndoe@email.com",
-    password: "123asd",
-    usertype: "user",
-    createTime: new Date(`2003-05-25`),
-    isActive: true,
-
-    get age() {
-      return calculateAge(this.birthdate);
-    },
-
-    get fullName() {
-      return `${this.firstname} ${this.lastname}`;
-    }
-
-    // Add any other properties you want to include for the user
-  },
-  {
-    uid: 2,
-    firstname: `Ada`,
-    lastname: `Lovelace`,
-    birthdate: new Date(`2004-11-08`),
-    gender: "female",
-
-    username: "Ada Lovelace",
-    email: "adalovelace@email.com",
-    password: "123asd",
-    usertype: "user",
-    createTime: new Date(`2024-03-22`),
-    isActive: true,
+    Username: "John Doe",
+    Email: "johndoe@email.com",
+    Password: "123asd",
+    UserType: "user",
+    CreateTime: new Date(`2003-05-25`),
+    IsActive: true,
+    Bio: "I am a software engineer",
+    TotalPosts: 0,
+    TotalLikes: 0,
+    TotalReads: 0,
 
     get age() {
-      return calculateAge(this.birthdate);
+      return calculateAge(this.Birthdate);
     },
 
-    get fullName() {
-      return `${this.firstname} ${this.lastname}`;
+    get FullName() {
+      return `${this.Firstname} ${this.Lastname}`;
     }
+
     // Add any other properties you want to include for the user
   },
 ];

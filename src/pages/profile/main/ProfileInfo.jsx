@@ -26,7 +26,7 @@ function ProfileInfo() {
              className={style.profile_photo}
              alt="author profile picture"/>
         <h2 className={style.profile_name}>
-          {currentUser.fullName}
+          {currentUser.Firstname} {currentUser.Lastname}
         </h2>
         <span className={style.follower_count}>892 Followers</span>
         <p className={style.bio}>Data Scientist, Computational Physicist and Game Developer.</p>
