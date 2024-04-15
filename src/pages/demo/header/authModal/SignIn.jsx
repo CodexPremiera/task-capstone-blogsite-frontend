@@ -5,54 +5,53 @@ import { useNavigate } from "react-router-dom";
 import TextInput from "../../../../components/form/TextInput.jsx";
 import PasswordInput from "../../../../components/form/PasswordInput.jsx";
 import {useCurrentUser} from "../../../../context/UserContext.jsx";
-import sampleUsers from "../../../../data/sampleUsers.js";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(" ");
-  const {currentUser, setCurrentUser } = useCurrentUser();
+  const { setCurrentUser } = useCurrentUser();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    const handleSubmitSignIn = async (e) => {
+      e.preventDefault();
 
-    // check if any field is empty
-    if (form.email === "" || form.password === "") {
-      setError("Please fill in all the fields");
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        "http://localhost/capstone-blogsite/login.php",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("User data:", data);
-
-        if (data !== null) {
-          setCurrentUser(data);
-          navigate("/");
-        } else {
-          setError("Invalid email or password");
-        }
-
-        return data;
+      // check if any field is empty
+      if (form.email === "" || form.password === "") {
+        setError("Please fill in all the fields");
+        return;
       }
-    } catch (error) {
-      console.error("Failed to sign in:", error);
-      setError("Failed to sign in");
-    }
-  };
+
+      try {
+        const response = await fetch(
+          "http://localhost/capstone-blogsite/login.php",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(form),
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("User data:", data);
+
+          if (data !== null) {
+            setCurrentUser(data);
+            navigate("/");
+          } else {
+            setError("Invalid email or password");
+          }
+
+          return data;
+        }
+      } catch (error) {
+        console.error("Failed to sign in:", error);
+        setError("Failed to sign in");
+      }
+    };
 
 
   const style = {
@@ -75,7 +74,7 @@ const SignIn = () => {
       </p>
 
       <form className={style.form}
-            onSubmit={handleSubmit} >
+            onSubmit={handleSubmitSignIn} >
         <TextInput form={form} setForm={setForm} type="email" title="email"/>
         <PasswordInput form={form} setForm={setForm} title="password"/>
 

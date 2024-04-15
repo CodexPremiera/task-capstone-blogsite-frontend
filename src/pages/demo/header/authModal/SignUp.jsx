@@ -2,43 +2,85 @@ import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import {MdKeyboardArrowLeft as GoBackArrow} from "react-icons/md";
 import TextInput from "../../../../components/form/TextInput.jsx";
 import PasswordInput from "../../../../components/form/PasswordInput.jsx";
 import DateInput from "../../../../components/form/DateInput.jsx";
 import DropdownInput from "../../../../components/form/DropdownInput.jsx";
 
 import {genders} from "../../../../data/genders.js";
+import {useCurrentUser} from "../../../../context/UserContext.jsx";
 
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const {currentUser, setCurrentUser } = useCurrentUser();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(" ");
   const [form, setForm] = useState({
     firstname: "",
     lastname: "",
-    username: "",
-    birthdate: "",
     gender: "",
+    birthdate: "",
+    username: "",
     email: "",
     password: "",
   });
 
-  const handleSubmit = async (e) => {
+  const handleSubmitSignUp = async (e) => {
     e.preventDefault();
 
-    // Check if all fields are entered
+    // trim the form fields
+    form.firstname = form.firstname.trim();
+    form.lastname = form.lastname.trim();
+    form.username = form.username.trim();
+    form.email = form.email.trim();
+
+    // check if all fields are entered
     if (
-      form.firstname === "" || form.lastname === "" || form.username === "" ||
-      form.birthdate=== "" || form.gender === "" ||
-      form.email === "" || form.password === ""
+      form.firstname === "" || form.lastname === "" || form.birthdate=== "" || form.gender === "" ||
+      form.username === "" || form.email === "" || form.password === ""
     ) {
       setError("Please fill in all the fields");
+      return;
     }
-    else {
-      setError(" ");
-      console.log(form);
+
+    try {
+      const response = await fetch(
+        "http://localhost/capstone-blogsite/signup.php",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        }
+      );
+
+      if (response.status === 400) {
+        setError("Fields cannot be empty.");
+        return;
+      }
+
+      if (response.status === 409) {
+        setError("Email address already exists.");
+        return;
+      }
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("User data:", data);
+
+        if (data.error)
+          setError(data.error);
+        else {
+          setCurrentUser(data);
+          navigate("/");
+        }
+
+        return data;
+      }
+
+    } catch (error) {
+      console.error("Failed to sign up:", error);
+      setError("Failed to sign up");
     }
   };
 
@@ -62,7 +104,7 @@ const SignUp = () => {
         Create your account and start making your stories with us.
       </p>
 
-      <form onSubmit={handleSubmit}
+      <form onSubmit={handleSubmitSignUp}
             className={style.form}>
 
         <div className={style.user_inputs}>
