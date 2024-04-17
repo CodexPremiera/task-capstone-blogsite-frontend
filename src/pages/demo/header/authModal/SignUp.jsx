@@ -15,7 +15,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const {currentUser, setCurrentUser } = useCurrentUser();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(" ");
+  const [remark, setRemark] = useState(" ");
   const [form, setForm] = useState({
     firstname: "",
     lastname: "",
@@ -25,6 +25,11 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+
+  const sendErrorMessage = (message) => {
+    setRemark(message);
+    throw new Error(message);
+  }
 
   const handleSubmitSignUp = async (e) => {
     e.preventDefault();
@@ -40,48 +45,49 @@ const SignUp = () => {
       form.firstname === "" || form.lastname === "" || form.birthdate=== "" || form.gender === "" ||
       form.username === "" || form.email === "" || form.password === ""
     ) {
-      setError("Please fill in all the fields");
+      const errorMessage = "Some fields are left empty.";
+      setRemark(errorMessage);
+      console.log(errorMessage);
       return;
     }
 
-    try {
-      const response = await fetch(
-        "http://localhost/capstone-blogsite/signup.php",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
+    fetch("http://localhost/capstone-blogsite/signup.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    })
+      .then((response) => {
+        if (response.ok)
+          return response.json();
+
+        let errorMessage = "";
+        switch (true) {
+          case response.status === 400:
+            errorMessage = "Some fields are empty texts.";
+            break;
+          case response.status === 409:
+            errorMessage = "The email address already exists.";
+            break;
+          default:
+            errorMessage = "Failed to connect to the server.";
+            break;
         }
-      );
 
-      if (response.status === 400) {
-        setError("Fields cannot be empty.");
-        return;
-      }
-
-      if (response.status === 409) {
-        setError("Email address already exists.");
-        return;
-      }
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("User data:", data);
-
-        if (data.error)
-          setError(data.error);
-        else {
+        sendErrorMessage(errorMessage);
+        return Promise.reject(errorMessage);
+      })
+      .then((data) => {
+        if (data !== null) {
           setCurrentUser(data);
+          console.log("User has signed up successfully.");
           navigate("/");
+        } else {
+          sendErrorMessage("Incorrect email or password");
         }
-
-        return data;
-      }
-
-    } catch (error) {
-      console.error("Failed to sign up:", error);
-      setError("Failed to sign up");
-    }
+      })
+      .catch((error) => {
+        console.error("Failed to sign up:", error);
+      });
   };
 
 
@@ -125,7 +131,7 @@ const SignUp = () => {
       </form>
 
       <div className={style.error_box}>
-        <span className={style.error}>{error}</span>
+        <span className={style.error}>{remark}</span>
       </div>
     </div>
   );

@@ -8,50 +8,61 @@ import {useCurrentUser} from "../../../../context/UserContext.jsx";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const [error, setError] = useState(" ");
+  const {remark, setRemark} = useState(" ");
   const { setCurrentUser } = useCurrentUser();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
-    const handleSubmitSignIn = async (e) => {
-      e.preventDefault();
+  const sendErrorMessage = (message) => {
+    setRemark(message);
+    throw new Error(message);
+  }
 
-      // check if any field is empty
-      if (form.email === "" || form.password === "") {
-        setError("Please fill in all the fields");
-        return;
-      }
+  const handleSubmitSignIn = async (e) => {
+    e.preventDefault();
 
-      try {
-        const response = await fetch(
-          "http://localhost/capstone-blogsite/login.php",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(form),
-          }
-        );
+    // check if any field is empty
+    if (form.email === "" || form.password === "") {
+      const errorMessage = "Some fields are left empty.";
+      setRemark(errorMessage);
+      console.log(errorMessage);
+      return;
+    }
 
-        if (response.ok) {
-          const data = await response.json();
-          console.log("User data:", data);
+    fetch("http://localhost/capstone-blogsite/login.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    })
+      .then((response) => {
+        switch (true) {
+          case response.ok:
+            return response.json();
 
-          if (data !== null) {
-            setCurrentUser(data);
-            navigate("/");
-          } else {
-            setError("Invalid email or password");
-          }
+          case response.status === 400:
+            sendErrorMessage("Some fields are empty texts.");
+            break;
 
-          return data;
+          default:
+            sendErrorMessage("Failed to connect to the server.");
+            break;
         }
-      } catch (error) {
+      })
+      .then((data) => {
+        if (data !== null) {
+          setCurrentUser(data);
+          console.log("User has signed in successfully.");
+          navigate("/");
+        } else {
+          sendErrorMessage("Incorrect email or password");
+        }
+      })
+      .catch((error) => {
         console.error("Failed to sign in:", error);
-        setError("Failed to sign in");
-      }
-    };
+      });
+  };
 
 
   const style = {
@@ -84,7 +95,7 @@ const SignIn = () => {
       </form>
 
       <div className={style.error_box}>
-        <span className={style.error}>{error}</span>
+        <span className={style.error}>{remark}</span>
       </div>
     </div>
   );
