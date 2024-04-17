@@ -1,23 +1,27 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Demo from "./pages/demo/Demo.jsx";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Home from "./pages/home/Home.jsx";
-import sampleUsers from "./data/sampleUsers.js";
 import NotFound from "./pages/notFound/NotFound.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import {UserProvider} from "./context/UserContext.jsx";
 
 
 function App() {
+  // Retrieve current user from local storage on component mount
+  useEffect(() => {
+    const storedUser = window.localStorage.getItem("currentUser");
+    if (storedUser) {
+      setCurrentUser(JSON.parse(storedUser));
+    }
+  }, []);
+
   const [currentUser, setCurrentUser] = useState(null);
-  const updateUser = (newUser) => {
-    setCurrentUser(newUser);
-  };
 
   const router = createBrowserRouter([
     {
       path: '/',
-      element: (currentUser ? <Home /> : <Demo />),
+      element: ((currentUser === null) ? <Demo /> : <Home />),
       errorElement: <NotFound />,
     },
     {

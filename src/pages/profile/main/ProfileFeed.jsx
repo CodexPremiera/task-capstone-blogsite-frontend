@@ -16,6 +16,7 @@ import {useCurrentUser} from "../../../context/UserContext.jsx";
 function ProfileFeed() {
   const { userId } = useParams();
   const { currentUser } = useCurrentUser();
+  console.log(currentUser);
 
   const activities = [
     {

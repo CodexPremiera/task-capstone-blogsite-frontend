@@ -21,6 +21,7 @@ const UserModal = ({ setModal }) => {
   const logout = () => {
     setCurrentUser(null); // Set currentUser to null
     navigate("/"); // Redirect to the home page
+    window.localStorage.removeItem("currentUser");
   };
 
   const modalMenuItems = [
@@ -81,7 +82,7 @@ const UserModal = ({ setModal }) => {
       </button>
 
       <span className="text-sm">
-          {secretEmail(currentUser.Email)}
+          {/*{secretEmail(currentUser.Email)}*/}
         </span>
     </section>
   );

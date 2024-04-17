@@ -54,6 +54,7 @@ const SignIn = () => {
         if (data !== null) {
           setCurrentUser(data);
           console.log("User has signed in successfully.");
+          window.localStorage.setItem("currentUser", JSON.stringify(data));
           navigate("/");
         } else {
           sendErrorMessage("Incorrect email or password");
