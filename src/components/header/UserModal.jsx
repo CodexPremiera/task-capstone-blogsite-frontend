@@ -81,9 +81,9 @@ const UserModal = ({ setModal }) => {
         Sign Out
       </button>
 
-      <span className="text-sm">
-          {/*{secretEmail(currentUser.Email)}*/}
-        </span>
+      <div className="text-sm">
+        <p>{currentUser.Email}</p>
+      </div>
     </section>
   );
 };

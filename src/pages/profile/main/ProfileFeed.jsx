@@ -1,7 +1,4 @@
 import React, {useState} from 'react';
-//import {Blog} from "../../../context/Context.jsx";
-
-import {useParams} from "react-router-dom";
 
 import ProfileHome from "./activities/ProfileHome.jsx";
 import ProfileLists from "./activities/ProfileLists.jsx";
@@ -14,7 +11,6 @@ import ProfilePic from "../../../assets/profile.jpg";
 import {useCurrentUser} from "../../../context/UserContext.jsx";
 
 function ProfileFeed() {
-  const { userId } = useParams();
   const { currentUser } = useCurrentUser();
   console.log(currentUser);
 
@@ -34,7 +30,7 @@ function ProfileFeed() {
   ];
 
   const [currentActive, setCurrentActive] = useState(activities[0]);
-  const [editModal, setEditModal] = useState(false);
+  const [ setEditModal] = useState(false);
   const isLaptop = !useWindowResize(1024);
   const isTablet = !useWindowResize(768);
 

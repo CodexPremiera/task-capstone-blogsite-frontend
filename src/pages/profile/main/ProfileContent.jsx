@@ -2,8 +2,12 @@ import React from 'react';
 import ProfileFeed from "./ProfileFeed.jsx";
 import ProfileInfo from "./ProfileInfo.jsx";
 import useWindowResize from "../../../hooks/useWindowResize.js";
+import {useCurrentUser} from "../../../context/UserContext.jsx";
 
 function ProfileContent() {
+  const { currentUser } = useCurrentUser();
+  console.log(currentUser);
+
   const isTablet = useWindowResize(1024);
 
   const style = {
