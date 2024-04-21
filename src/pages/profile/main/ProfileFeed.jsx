@@ -50,7 +50,7 @@ function ProfileFeed() {
   }
 
   return (
-    <div className="">
+    <div>
       <div className={style.profile}>
         <div className={style.profile_info}>
           {isTablet && (

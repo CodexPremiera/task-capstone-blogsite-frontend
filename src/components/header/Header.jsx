@@ -13,7 +13,6 @@ import Search from "./Search.jsx";
 const Header = () => {
   const [modal, setModal] = useState(false);
   const [searchModal, setSearchModal] = useState(false);
-  const currentUser = useState();
 
   const style = {
     header: `border-b border-neutral-200 w-full fixed z-50 bg-white`,

@@ -5,6 +5,7 @@ import Home from "./pages/home/Home.jsx";
 import NotFound from "./pages/notFound/NotFound.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import {useCurrentUser} from "./context/Context.jsx";
+import Write from "./pages/write/Write.jsx";
 
 
 function App() {
@@ -20,6 +21,11 @@ function App() {
     {
       path: '/profile/:profileId',
       element: <Profile />,
+      errorElement: <NotFound />,
+    },
+    {
+      path: '/write',
+      element: <Write />,
       errorElement: <NotFound />,
     },
     {

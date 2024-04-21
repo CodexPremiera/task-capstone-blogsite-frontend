@@ -13,8 +13,8 @@ const Context = ({ children }) => {
     const storedUser = window.localStorage.getItem("currentUser");
     if (storedUser) {
       setCurrentUser(JSON.parse(storedUser));
-      setIsLoading(false);
     }
+    setIsLoading(false);
   }, []);
 
   return (

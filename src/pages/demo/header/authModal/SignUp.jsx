@@ -13,7 +13,7 @@ import {useCurrentUser} from "../../../../context/Context.jsx";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const {currentUser, setCurrentUser } = useCurrentUser();
+  const { setCurrentUser } = useCurrentUser();
   const [loading, setLoading] = useState(false);
   const [remark, setRemark] = useState(" ");
   const [form, setForm] = useState({
@@ -80,6 +80,7 @@ const SignUp = () => {
         if (data !== null) {
           setCurrentUser(data);
           console.log("User has signed up successfully.");
+          window.localStorage.setItem("currentUser", JSON.stringify(data));
           navigate("/");
         } else {
           sendErrorMessage("Incorrect email or password");
