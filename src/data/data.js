@@ -31,7 +31,6 @@ export const footerLinks = [
   "Help",
   "Status",
   "Writers",
-  "Blog",
   "Careers",
   "Privacy",
   "Terms",

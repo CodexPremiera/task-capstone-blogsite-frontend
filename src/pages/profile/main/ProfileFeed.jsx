@@ -8,10 +8,10 @@ import { IoIosMore as MoreIcon } from "react-icons/io";
 import CallToAction from "./CallToAction.jsx";
 import useWindowResize from "../../../hooks/useWindowResize.js";
 import ProfilePic from "../../../assets/profile.jpg";
-import {useCurrentUser} from "../../../context/UserContext.jsx";
+import {useCurrentUser} from "../../../context/Context.jsx";
 
 function ProfileFeed() {
-  const { currentUser } = useCurrentUser();
+  const { currentUser, setCurrentUser } = useCurrentUser();
   console.log(currentUser);
 
   const activities = [

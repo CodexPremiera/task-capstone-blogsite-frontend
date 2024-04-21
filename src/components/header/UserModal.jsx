@@ -10,7 +10,7 @@ import { LiaEditSolid as WriteIcon } from "react-icons/lia";
 import {Link, useNavigate} from "react-router-dom";
 import sampleUsers from "../../data/sampleUsers.js";
 import {secretEmail} from "../../secretEmail.js";
-import {useCurrentUser} from "../../context/UserContext.jsx";
+import {useCurrentUser} from "../../context/Context.jsx";
 
 
 const UserModal = ({ setModal }) => {

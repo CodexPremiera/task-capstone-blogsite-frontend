@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import TextInput from "../../../../components/form/TextInput.jsx";
 import PasswordInput from "../../../../components/form/PasswordInput.jsx";
-import {useCurrentUser} from "../../../../context/UserContext.jsx";
+import {useCurrentUser} from "../../../../context/Context.jsx";
 
 const SignIn = () => {
   const navigate = useNavigate();

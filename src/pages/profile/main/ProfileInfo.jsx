@@ -1,7 +1,7 @@
 import React from 'react';
 import ProfilePic from "../../../assets/profile.jpg";
 import CallToAction from "./CallToAction.jsx";
-import {useCurrentUser} from "../../../context/UserContext.jsx";
+import {useCurrentUser} from "../../../context/Context.jsx";
 
 
 function ProfileInfo() {

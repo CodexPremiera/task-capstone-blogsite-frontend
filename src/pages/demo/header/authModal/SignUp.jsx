@@ -8,7 +8,7 @@ import DateInput from "../../../../components/form/DateInput.jsx";
 import DropdownInput from "../../../../components/form/DropdownInput.jsx";
 
 import {genders} from "../../../../data/genders.js";
-import {useCurrentUser} from "../../../../context/UserContext.jsx";
+import {useCurrentUser} from "../../../../context/Context.jsx";
 
 
 const SignUp = () => {
