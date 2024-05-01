@@ -4,6 +4,7 @@ import { IoIosRemoveCircleOutline as RemoveIcon } from "react-icons/io";
 import { IoIosMore as MoreIcon } from "react-icons/io";
 
 import ProfilePic from '../../../assets/profile.jpg'
+import {formatDate} from "../../../utils/formatDate.js";
 
 function PostCard( {post} ) {
 
@@ -39,25 +40,25 @@ function PostCard( {post} ) {
                className={style.author_photo}
                alt="author profile picture"/>
           <span className={style.author_name}>
-            {post.author} · <span className={style.post_date}>{post.date}</span>
+            {`${post.Firstname} ${post.Lastname}`} · <span className={style.post_date}>{formatDate(post.PostDate)}</span>
           </span>
         </div>
 
         <div className={style.content}>
           <div className={style.article}>
-            <span className={style.article_title}>{post.title}</span>
-            <p className={style.article_desc}>{post.desc}</p>
+            <span className={style.article_title}>{post.Title}</span>
+            <p className={style.article_desc}>{post.Content}</p>
           </div>
 
           <div className={style.media}>
-            <img src={`${post.postImg}`}
+            <img src={`${post.PhotoURL}`}
                  className={style.media_image}
                  alt="author profile picture"/>
           </div>
         </div>
 
         <div className={style.actions}>
-          <span className={style.action_readTime}>{post.readTime}</span>
+          <span className={style.action_readTime}>11 min read</span>
           <div className={style.action_icon_row}>
             <SaveIcon className={style.action_icon}/>
             <RemoveIcon className={style.action_icon}/>

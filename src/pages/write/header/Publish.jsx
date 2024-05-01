@@ -7,9 +7,11 @@ import {useForm} from "../../../context/FormContext.jsx";
 import {CiSearch as SearchIcon} from "react-icons/ci";
 import TitleInput from "../inputs/TitleInput.jsx";
 import PhotoUrlInput from "../inputs/PhotoUrlInput.jsx";
+import {useNavigate} from "react-router-dom";
 
 
 const PublishModal = ({modal, setModal}) => {
+  const navigate = useNavigate();
   const hidden = modal ? "visible opacity-100" : "invisible opacity-0";
   const { currentUser, isLoading } = useCurrentUser();
   const { form, setForm } = useForm();
@@ -50,6 +52,9 @@ const PublishModal = ({modal, setModal}) => {
       .then((response) => {
         switch (true) {
           case response.ok:
+            setRemark("");
+            setModal(false);
+            navigate("/");
             return response.json();
 
           case response.status === 400:
@@ -64,9 +69,6 @@ const PublishModal = ({modal, setModal}) => {
       .catch((error) => {
         console.error("Failed to publish post:", error);
       });
-
-    setRemark("");
-    setModal(false);
   }
 
 
@@ -158,7 +160,6 @@ const PublishModal = ({modal, setModal}) => {
                 </button>
                 <span className={style.error}>{remark}</span>
               </div>
-
             </div>
 
           </div>

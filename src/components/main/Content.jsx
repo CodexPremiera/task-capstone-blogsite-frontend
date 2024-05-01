@@ -19,8 +19,6 @@ function Content() {
     <div className={style.container}>
       <section className={style.post_feed}>
         <PostFeed/>
-        <PostFeed/>
-        <PostFeed/>
       </section>
 
       {isTablet && (
