@@ -14,16 +14,59 @@ const PublishModal = ({modal, setModal}) => {
   const { currentUser, isLoading } = useCurrentUser();
   const { form, setForm } = useForm();
   const [imageError, setImageError] = useState(false);
-
+  const [remark, setRemark] = useState("");
   const handleImageError = () => {
     setImageError(true);
   };
 
+  const sendErrorMessage = (message) => {
+    setRemark(message);
+    throw new Error(message);
+  }
+
   const handlePublish = async (e) => {
+    e.preventDefault();
+
+    // trim the form fields
+    form.title = form.title.trim();
+    form.content = form.content.trim();
+    form.photo = form.photo.trim();
+
+    // check if all fields are entered
+    if ( form.title === "" || form.content === "" ) {
+      const errorMessage = "Some fields are left empty.";
+      setRemark(errorMessage);
+      console.log(errorMessage);
+      return;
+    }
 
 
+    // insert the post to the backend
+    fetch("http://localhost/capstone-blogsite/posts/publish.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    })
+      .then((response) => {
+        switch (true) {
+          case response.ok:
+            return response.json();
+
+          case response.status === 400:
+            sendErrorMessage("Some fields are empty texts.");
+            break;
+
+          default:
+            sendErrorMessage("Failed to connect to the server.");
+            break;
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to publish post:", error);
+      });
+
+    setRemark("");
     setModal(false);
-    console.log(form);
   }
 
 
@@ -57,11 +100,12 @@ const PublishModal = ({modal, setModal}) => {
     learn_more: `text-neutral-600 text-sm`,
 
     h2: `text-4xl mb-6 font-title`,
+    publish_box: `flex items-end gap-4`,
     buttons: `flex gap-3`,
     btn_publish: `text-white rounded-full px-4 py-2 text-sm font-medium bg-green_custom hover:bg-green_hover
     flex grow-1 max-w-[10rem] justify-center px-6 py-2 ${isLoading ? "opacity-50 pointer-events-none" : ""}`,
 
-    cancel: `bg-red-800 hover:bg-red-900`,
+    error: `text-sm font-medium text-center text-red-500`
   };
 
   return (
@@ -92,7 +136,7 @@ const PublishModal = ({modal, setModal}) => {
             <div className={style.publish}>
               <article className={style.article}>
                 <h3 className={style.article_title}>{form.title}</h3>
-                <p className={style.article_desc}>{form.story}</p>
+                <p className={style.article_desc}>{form.content}</p>
               </article>
 
               <div className={style.tag_box}>
@@ -107,10 +151,14 @@ const PublishModal = ({modal, setModal}) => {
                 </div>
               </div>
 
-              <button className={`${style.btn_publish}`}
-                      onClick={handlePublish}>
-                Publish
-              </button>
+              <div className={style.publish_box}>
+                <button className={`${style.btn_publish}`}
+                        onClick={handlePublish}>
+                  Publish
+                </button>
+                <span className={style.error}>{remark}</span>
+              </div>
+
             </div>
 
           </div>

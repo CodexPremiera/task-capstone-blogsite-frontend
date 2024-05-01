@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 
 import TitleInput from "../inputs/TitleInput.jsx";
-import ArticleInput from "../inputs/ArticleInput.jsx";
+import ContentInput from "../inputs/ContentInput.jsx";
 import {useForm} from "../../../context/FormContext.jsx";
 
 
 function DraftArea() {
-  const {form, setForm, preview, setPreview} = useForm();
+  const {form, setForm} = useForm();
 
   const style = {
     container: `flex flex-col`,
@@ -21,7 +21,7 @@ function DraftArea() {
     <div className={style.container}>
       <form className={style.form}>
         <TitleInput form={form} setForm={setForm} />
-        <ArticleInput form={form} setForm={setForm} />
+        <ContentInput form={form} setForm={setForm} />
       </form>
     </div>
   );

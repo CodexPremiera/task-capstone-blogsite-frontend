@@ -9,14 +9,10 @@ function Write() {
   const {preview, setPreview} = useState(false);
   const [form, setForm] = useState({
     title: "Learning to Learn: How AI and Humans Learn",
-    story: "LLMs have surprised the world with their abilities. Sometimes, though, these models fail spectacularly in reasoning tasks. So there is active research to improve these models both at the architectural level and at",
+    content: "LLMs have surprised the world with their abilities. Sometimes, though, these models fail spectacularly in reasoning tasks. So there is active research to improve these models both at the architectural level and at",
     photo: "",
     author: currentUser.ID_UserAccount
   });
-
-  const handlePublish = async (e) => {
-    console.log(form);
-  }
 
   const styles = {
     container: `flex flex-row max-w-[1368px] justify-evenly mx-auto relative top-[57px] `,

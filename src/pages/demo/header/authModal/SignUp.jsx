@@ -15,7 +15,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const { setCurrentUser } = useCurrentUser();
   const [loading, setLoading] = useState(false);
-  const [remark, setRemark] = useState(" ");
+  const [remark, setRemark] = useState("");
   const [form, setForm] = useState({
     firstname: "",
     lastname: "",
@@ -51,7 +51,7 @@ const SignUp = () => {
       return;
     }
 
-    fetch("http://localhost/capstone-blogsite/signup.php", {
+    fetch("http://localhost/capstone-blogsite/users/signup.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),

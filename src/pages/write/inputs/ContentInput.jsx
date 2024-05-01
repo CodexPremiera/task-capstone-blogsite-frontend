@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import TextareaAutosize from 'react-textarea-autosize';
 import useWindowResize from "../../../hooks/useWindowResize.js";
 
-const ArticleInput = ({ form, setForm }) => {
-  const title = `story`;
+const ContentInput = ({ form, setForm }) => {
+  const title = `content`;
   const [isFocused, setIsFocused] = useState(false);
   const isTablet = useWindowResize(900);
 
@@ -34,4 +34,4 @@ const ArticleInput = ({ form, setForm }) => {
   );
 };
 
-export default ArticleInput;
+export default ContentInput;

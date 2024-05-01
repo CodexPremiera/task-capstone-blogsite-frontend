@@ -31,7 +31,8 @@ const SignIn = () => {
       return;
     }
 
-    fetch("http://localhost/capstone-blogsite/login.php", {
+    // fetch the user account from the backend
+    fetch("http://localhost/capstone-blogsite/users/login.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
