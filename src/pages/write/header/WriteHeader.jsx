@@ -4,10 +4,10 @@ import {BsMedium as MediumLogo} from "react-icons/bs";
 import {PiBellLight as NotificationIcon} from "react-icons/pi";
 import Modal from "../../../components/utils/Modal.jsx";
 import UserModal from "../../../components/header/UserModal.jsx";
-import Publish from "../main/Publish.jsx";
+import Publish from "./Publish.jsx";
 import {useForm} from "../../../context/FormContext.jsx";
 
-const WriteHeader = ({onFormSubmit}) => {
+const WriteHeader = () => {
   const [profileModal, setProfileModal] = useState(false);
   const [previewModal, setPreviewModal] = useState(false);
 

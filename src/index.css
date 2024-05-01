@@ -34,3 +34,7 @@ body {
 .btn-green {
   @apply text-white rounded-full px-4 py-2 text-sm font-medium bg-green_custom hover:bg-green_hover;
 }
+
+img[alt] {
+  content: none;
+}

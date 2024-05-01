@@ -8,12 +8,13 @@ function Write() {
   const { currentUser } = useCurrentUser();
   const {preview, setPreview} = useState(false);
   const [form, setForm] = useState({
-    title: "",
-    story: "",
+    title: "Learning to Learn: How AI and Humans Learn",
+    story: "LLMs have surprised the world with their abilities. Sometimes, though, these models fail spectacularly in reasoning tasks. So there is active research to improve these models both at the architectural level and at",
+    photo: "",
     author: currentUser.ID_UserAccount
   });
 
-  const handleFormSubmit = async (e) => {
+  const handlePublish = async (e) => {
     console.log(form);
   }
 
@@ -25,8 +26,8 @@ function Write() {
   return (
     <>
       <FormProvider form={form} setForm={setForm}
-                    preview={preview} setPreview={setPreview}>
-        <WriteHeader onFormSubmit={handleFormSubmit}/>
+                    preview={preview} setPreview={setPreview} >
+        <WriteHeader />
 
         <main className={styles.container}>
           <section className={styles.draft_area}>

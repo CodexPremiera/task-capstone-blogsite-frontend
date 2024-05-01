@@ -6,7 +6,6 @@ import { IoIosMore as MoreIcon } from "react-icons/io";
 import ProfilePic from '../../../assets/profile.jpg'
 
 function PostCard( {post} ) {
-  //const post = samplePosts[0];
 
   const style = {
     container: `flex flex-col font-texts max-w-[680px] pt-2 pb-2 md:pb-4 lg:pb-6 border-b border-gray-100`,
