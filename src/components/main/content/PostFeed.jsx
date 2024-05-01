@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import PostCard from "./PostCard.jsx";
-// import samplePosts from "../../../data/samplePosts.js";
-// import {useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 function PostFeed() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const getPosts = () => {
-      fetch("http://localhost/capstone-blogsite/posts/home-feed.php")
+      fetch(`http://localhost/capstone-blogsite/posts/home-feed.php`)
         .then((response) => {
           switch (true) {
             case response.ok:
@@ -33,12 +32,12 @@ function PostFeed() {
   }, []);
 
 
-
-
   return (
     <div className={`flex flex-col gap-6 lg:gap-8`}>
       {posts.map(post => (
-        <PostCard post={post} />
+        <Link to={`/post/${post.ID_Post}`} >
+          <PostCard key={post.ID_Post} post={post} />
+        </Link>
         ))}
     </div>
   );

@@ -2,10 +2,7 @@ import React, {useState} from "react";
 import Modal from "../../../components/utils/Modal.jsx";
 import {IoMdClose as ExitIcon} from "react-icons/io";
 import {useCurrentUser} from "../../../context/Context.jsx";
-import samplePosts from "../../../data/samplePosts.js";
 import {useForm} from "../../../context/FormContext.jsx";
-import {CiSearch as SearchIcon} from "react-icons/ci";
-import TitleInput from "../inputs/TitleInput.jsx";
 import PhotoUrlInput from "../inputs/PhotoUrlInput.jsx";
 import {useNavigate} from "react-router-dom";
 

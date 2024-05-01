@@ -6,10 +6,7 @@ import { BiSpreadsheet as StoriesIcon } from "react-icons/bi";
 import { HiOutlineChartBar as StatsIcon } from "react-icons/hi";
 import { LiaEditSolid as WriteIcon } from "react-icons/lia";
 
-//import { Blog } from "../../context/Context.jsx";
 import {Link, useNavigate} from "react-router-dom";
-import sampleUsers from "../../data/sampleUsers.js";
-import {secretEmail} from "../../secretEmail.js";
 import {useCurrentUser} from "../../context/Context.jsx";
 
 
@@ -19,8 +16,8 @@ const UserModal = ({ setModal }) => {
 
   // this logs the user out of the entire website
   const logout = () => {
-    setCurrentUser(null); // Set currentUser to null
-    navigate("/"); // Redirect to the home page
+    setCurrentUser(null);
+    navigate("/");
     window.localStorage.removeItem("currentUser");
   };
 
