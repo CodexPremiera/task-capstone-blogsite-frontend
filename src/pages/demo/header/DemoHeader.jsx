@@ -3,7 +3,7 @@ import { nav } from "../../../data/data.js";
 import Logo from '../../../assets/medium-logo.png'
 import { Link } from "react-router-dom";
 
-import AuthModal from "./authModal/AuthModal.jsx";
+import AuthModal from "./authentication/AuthModal.jsx";
 
 const DemoHeader = () => {
   const [isActive, setIsActive] = useState(false);

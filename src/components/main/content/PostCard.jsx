@@ -1,5 +1,5 @@
 import React from 'react';
-import { MdOutlineBookmarkAdd as SaveIcon } from "react-icons/md";
+import { BsBookmarkPlus as SaveIcon } from "react-icons/bs";
 import { IoIosRemoveCircleOutline as RemoveIcon } from "react-icons/io";
 import { IoIosMore as MoreIcon } from "react-icons/io";
 

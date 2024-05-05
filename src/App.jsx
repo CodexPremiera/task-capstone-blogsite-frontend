@@ -1,17 +1,18 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Demo from "./pages/demo/Demo.jsx";
-import React from "react";
 import Home from "./pages/home/Home.jsx";
 import NotFound from "./pages/notFound/NotFound.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import {useCurrentUser} from "./context/Context.jsx";
 import Write from "./pages/write/Write.jsx";
 import Post from "./pages/post/Post.jsx";
+import Dashboard from "./pages/dashboard/Dashboard.jsx";
 
 
 function App() {
   // Retrieve current user from local storage on component mount
   const { currentUser } = useCurrentUser();
+
 
   const router = createBrowserRouter([
     {
@@ -32,6 +33,11 @@ function App() {
     {
       path: '/write',
       element: <Write />,
+      errorElement: <NotFound />,
+    },
+    {
+      path: '/dashboard',
+      element: <Dashboard />,
       errorElement: <NotFound />,
     },
     {
