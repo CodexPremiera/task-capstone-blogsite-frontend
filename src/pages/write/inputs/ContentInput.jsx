@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import TextareaAutosize from 'react-textarea-autosize';
-import useWindowResize from "../../../hooks/useWindowResize.js";
+import useWindowResize from "../../../hooks/useWindowResize.js"
 
 const ContentInput = ({ form, setForm }) => {
   const title = `content`;

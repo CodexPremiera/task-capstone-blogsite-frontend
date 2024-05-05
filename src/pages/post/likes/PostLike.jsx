@@ -50,7 +50,6 @@ function PostLike( {post} ) {
   const handleLike = async (e) => {
     setLikeCount(userHasLiked ? likeCount - 1 : likeCount + 1);
     setUserHasLiked(!userHasLiked);
-    console.log(form)
 
     e.preventDefault();
 

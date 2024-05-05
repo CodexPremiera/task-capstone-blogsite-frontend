@@ -2,8 +2,9 @@ import React from 'react';
 import ProfilePic from "../../../assets/profile.jpg";
 import {IoIosMore as MoreIcon} from "react-icons/io";
 import {PiHandsClappingThin as ClapIcon} from "react-icons/pi";
+import timeAgo from "../../../utils/timeAgo.js";
 
-function Commenter( ) {
+function Commenter( {commenter} ) {
 
   const style = {
     container: `flex flex-col gap-3 text-[#242424] border-b pb-6 mb-8 mx-2`,
@@ -17,7 +18,7 @@ function Commenter( ) {
 
     comment: `font-content`,
 
-    lower_bar: `flex justify-between align-center mt-1`,
+    lower_bar: `flex justify-between align-center mt-1 text-sm`,
     likes: `flex gap-1 items-center`,
     like_icon: `h-[20px] w-[20px] cursor-pointer`,
   }
@@ -32,8 +33,8 @@ function Commenter( ) {
                alt="commenter profile picture"/>
 
           <div className={style.commenter_info}>
-            <span className={style.commenter_name}> Ashley Ken Comandao </span>
-            <span className={style.commenter_desc}> 1 month ago </span>
+            <span className={style.commenter_name}> {`${commenter.Firstname} ${commenter.Lastname}`} </span>
+            <span className={style.commenter_desc}> {timeAgo(commenter.CommentDate)} </span>
           </div>
         </div>
 
@@ -42,7 +43,7 @@ function Commenter( ) {
 
       <div className={style.comment}>
         <p>
-          Good job with the article! Just an heads-up, the link for "User Testing" is pointing to Trymata.
+          {commenter.Content}
         </p>
       </div>
 

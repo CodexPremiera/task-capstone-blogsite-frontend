@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {GoComment as CommentIcon} from "react-icons/go";
 import PostCommentModal from "./PostCommentModal.jsx";
 
-function PostComment({post} ) {
+function PostComment( {post} ) {
   const [commentModal, setCommentModal] = useState(false);
 
 
@@ -22,7 +22,7 @@ function PostComment({post} ) {
         <span>{post.CommentCount}</span>
       </button>
 
-      <PostCommentModal modal={commentModal} setModal={setCommentModal}/>
+      <PostCommentModal post={post} modal={commentModal} setModal={setCommentModal}/>
     </>
   );
 }

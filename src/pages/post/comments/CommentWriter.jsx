@@ -2,11 +2,19 @@ import React, {useState} from 'react';
 import ProfilePic from "../../../assets/profile.jpg";
 import TextareaAutosize from "react-textarea-autosize";
 import useWindowResize from "../../../hooks/useWindowResize.js";
+import {useCurrentUser} from "../../../context/Context.jsx";
 
-function CommentWriter( ) {
+function CommentWriter( {setModal, post} ) {
   const [isFocused, setIsFocused] = useState(false);
   const isTablet = useWindowResize(900);
   const [textAreaValue, setTextAreaValue] = useState('');
+  const {currentUser}= useCurrentUser();
+
+  const [form, setForm] = useState({
+    comment: '',
+    postId: post.ID_Post,
+    userAccountId: currentUser.ID_UserAccount
+  })
 
 
   const style = {
@@ -30,11 +38,39 @@ function CommentWriter( ) {
   }
 
   function handleChange(event) {
-    setTextAreaValue(event.target.value);
+    setForm({ ...form, comment: event.target.value });
   }
 
   function handleCancel() {
-    setTextAreaValue('');
+    setForm({ ...form, comment: ''});
+  }
+
+  async function handlePublish (e) {
+    e.preventDefault();
+
+    // trim the form fields
+    form.comment = form.comment.trim();
+
+    // check if all fields are entered
+    if ( form.comment === "") {
+      return;
+    }
+
+    // insert the post to the backend
+    fetch("http://localhost/capstone-blogsite/posts/publish-comment.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    })
+      .then((response) => {
+        if (response.ok) {
+          setModal(false);
+          return response.json();
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to publish comment:", error);
+      });
   }
 
   return (
@@ -46,14 +82,14 @@ function CommentWriter( ) {
              alt="commenter profile picture"/>
 
         <div className={style.commenter_info}>
-          <span className={style.commenter_name}> Ashley Ken Comandao </span>
+          <span className={style.commenter_name}> {`${currentUser.Firstname} ${currentUser.Lastname}`} </span>
         </div>
       </div>
 
       <TextareaAutosize
         className={style.input}
         placeholder={`What are your thoughts...`}
-        value={textAreaValue}
+        value={form.comment}
         onChange={handleChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
@@ -63,7 +99,7 @@ function CommentWriter( ) {
         <button className={style.btn_cancel} onClick={handleCancel}>
           Cancel
         </button>
-        <button className={style.btn_send}>
+        <button className={style.btn_send} onClick={handlePublish}>
           Publish
         </button>
       </div>
