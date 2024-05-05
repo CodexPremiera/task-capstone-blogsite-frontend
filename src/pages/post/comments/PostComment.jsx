@@ -19,7 +19,7 @@ function PostComment({post} ) {
     <>
       <button className={style.comments} onClick={handleComment}>
         <CommentIcon className={style.comment_icon}/>
-        <span >25</span>
+        <span>{post.CommentCount}</span>
       </button>
 
       <PostCommentModal modal={commentModal} setModal={setCommentModal}/>

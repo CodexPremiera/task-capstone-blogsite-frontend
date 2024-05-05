@@ -60,7 +60,7 @@ const SignUp = () => {
         if (response.ok)
           return response.json();
 
-        let errorMessage = "";
+        let errorMessage;
         switch (true) {
           case response.status === 400:
             errorMessage = "Some fields are empty texts.";

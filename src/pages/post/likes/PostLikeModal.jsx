@@ -1,13 +1,45 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import Modal from "../../../components/utils/Modal.jsx";
 import {IoMdClose as ExitIcon  } from "react-icons/io";
 import Liker from "./Liker.jsx";
+import {Link} from "react-router-dom";
+import PostCard from "../../../components/main/content/PostCard.jsx";
 
 
-
-const PostLikeModal = ({modal, setModal}) => {
+const PostLikeModal = ({modal, setModal, post}) => {
   const hidden = modal ? "visible opacity-100 translate-x-[0]" : "invisible opacity-0 translate-x-[100%] ";
+  const [likers, setLikers] = useState([]);
+
+  useEffect(() => {
+    const getLikers = () => {
+      console.log(post)
+      fetch(`http://localhost/capstone-blogsite/posts/post-likers.php`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(post),
+      })
+        .then((response) => {
+          switch (true) {
+            case response.ok:
+              return response.json();
+
+            default:
+              break;
+          }
+        })
+        .then((data) => {
+          if (data !== null) {
+            setLikers(data);
+          }
+        })
+        .catch((error) => {
+          console.error(`Failed to get posts: ${error}`);
+        });
+    }
+    getLikers();
+  }, [post]);
+
 
   const style = {
     container: `flex justify-center z-50 fixed overflow-auto bg-white p-[1rem] md:p-[2rem]  
@@ -27,7 +59,7 @@ const PostLikeModal = ({modal, setModal}) => {
         <div className={style.content}>
           <div className={style.header}>
             <span className={style.like_count}>
-              988 people liked
+              {post.ReactCount} people liked
             </span>
             <button
               onClick={() => setModal(false)}
@@ -37,21 +69,9 @@ const PostLikeModal = ({modal, setModal}) => {
           </div>
 
           <div className={style.liker_list}>
-            <Liker/>
-            <Liker/>
-            <Liker/>
-            <Liker/>
-            <Liker/>
-            <Liker/>
-            <Liker/>
-            <Liker/>
-            <Liker/>
-            <Liker/>
-            <Liker/>
-            <Liker/>
-            <Liker/>
-            <Liker/>
-            <Liker/>
+            {likers.map(liker => (
+              <Liker key={liker.UserAccountId} liker={liker}/>
+            ))}
           </div>
         </div>
 

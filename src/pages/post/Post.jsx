@@ -6,6 +6,8 @@ import {formatDate} from "../../utils/formatDate.js";
 import {BsBookmarkPlus as SaveIcon} from "react-icons/bs";
 import {IoShareOutline as ShareIcon} from "react-icons/io5";
 import {IoIosMore as MoreIcon} from "react-icons/io";
+import { BsEye as ReadIcon } from "react-icons/bs";
+import { BsEyeFill as ReadActiveIcon } from "react-icons/bs";
 
 import Header from "../../components/header/Header.jsx";
 import Loading from "../../components/utils/Loading.jsx";
@@ -17,6 +19,7 @@ const Post = () => {
   const { postId } = useParams();
   const [post, setPost] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const userHasRead = true;
 
 
   useEffect(() => {
@@ -69,7 +72,10 @@ const Post = () => {
     share_icon: `h-[24px] w-[24px]`,
     more_icon: `h-[24px] w-[24px]`,
 
-    article_content: `font-title text-[#242424] text-[1.25rem] leading-[2rem]`,
+    reads: `flex gap-2 items-center cursor-pointer hover:text-[#242424]`,
+    read_icon: `h-[20px] w-[20px]`,
+
+    article: `font-title text-[#242424] text-[1.25rem] leading-[2rem]`,
   }
 
 
@@ -104,6 +110,13 @@ const Post = () => {
             <div className={style.action_left}>
               <PostLike post={post} />
               <PostComment post={post} />
+              <div className={style.reads}>
+                {userHasRead ?
+                  <ReadActiveIcon className={style.read_icon}/> :
+                  <ReadIcon className={style.read_icon}/>
+                }
+                <span>{post.ReadCount}</span>
+              </div>
             </div>
 
             <div className={style.action_left}>
@@ -119,10 +132,8 @@ const Post = () => {
             </div>
           </div>
 
-          <article className={style.article_content}>
-            <p>
-              {post.Content}
-            </p>
+          <article className={style.article}>
+            <p>{post.Content}</p>
           </article>
         </section>
       </main>

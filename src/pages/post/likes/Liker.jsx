@@ -1,7 +1,7 @@
 import React from 'react';
 import ProfilePic from "../../../assets/profile.jpg";
 
-function Liker( ) {
+function Liker( {liker} ) {
 
   const style = {
     container: ``,
@@ -23,11 +23,10 @@ function Liker( ) {
 
         <div className={style.profile_info}>
           <span className={style.liker_name}>
-            Ashley Ken Comandao
+            {`${liker.Firstname} ${liker.Lastname}`}
           </span>
           <span className={style.liker_desc}>
-            Decent Programmer. Great Data Engineer. Lazy Traveller.
-            Decent Programmer. Great Data Engineer. Lazy Traveller.
+            {liker.Bio}
           </span>
         </div>
       </div>
