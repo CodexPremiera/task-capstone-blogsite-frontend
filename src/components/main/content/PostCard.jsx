@@ -58,7 +58,7 @@ function PostCard( {post} ) {
         </div>
 
         <div className={style.actions}>
-          <span className={style.action_readTime}>11 min read</span>
+          <span className={style.action_readTime}>{`11 min read • ${post.ReadCount} read`}</span>
           <div className={style.action_icon_row}>
             <SaveIcon className={style.action_icon}/>
             <RemoveIcon className={style.action_icon}/>

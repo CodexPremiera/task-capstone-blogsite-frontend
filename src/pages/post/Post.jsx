@@ -14,18 +14,27 @@ import Loading from "../../components/utils/Loading.jsx";
 import PostComment from "./comments/PostComment.jsx";
 import PostLike from "./likes/PostLike.jsx";
 import More from "./more/More.jsx";
+import {useCurrentUser} from "../../context/Context.jsx";
 
 
 const Post = () => {
   const { postId } = useParams();
   const [post, setPost] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const userHasRead = true;
+  const { currentUser } = useCurrentUser();
+
+  const form = {
+    userAccountId: parseInt(currentUser.ID_UserAccount),
+  }
 
 
   useEffect(() => {
     const getPosts = () => {
-      fetch(`http://localhost/capstone-blogsite/posts/read-post.php?postId=${postId}`)
+      fetch(`http://localhost/capstone-blogsite/posts/read-post.php?postId=${postId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      })
         .then((response) => {
           switch (true) {
             case response.ok:
@@ -111,10 +120,7 @@ const Post = () => {
               <PostLike post={post} />
               <PostComment post={post} />
               <div className={style.reads}>
-                {userHasRead ?
-                  <ReadActiveIcon className={style.read_icon}/> :
-                  <ReadIcon className={style.read_icon}/>
-                }
+                <ReadActiveIcon className={style.read_icon}/>
                 <span>{post.ReadCount}</span>
               </div>
             </div>
