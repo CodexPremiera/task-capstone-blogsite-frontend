@@ -3,6 +3,7 @@ import ProfilePic from "../../../assets/profile.jpg";
 import {PiHandsClappingThin as ClapIcon} from "react-icons/pi";
 import timeAgo from "../../../utils/timeAgo.js";
 import CommentMore from "./CommentMore.jsx";
+import CommentLike from "./CommentLike.jsx";
 
 function Commenter( {commenter} ) {
 
@@ -50,12 +51,7 @@ function Commenter( {commenter} ) {
       </div>
 
       <div className={style.lower_bar}>
-        <div className={style.likes}>
-          <button>
-            <ClapIcon className={`${style.like_icon}`}/>
-          </button>
-          <span>10</span>
-        </div>
+        <CommentLike commenter={commenter} />
         <button>
           Reply
         </button>
