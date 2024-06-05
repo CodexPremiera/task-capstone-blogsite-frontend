@@ -13,10 +13,14 @@ function App() {
   // Retrieve current user from local storage on component mount
   const { currentUser } = useCurrentUser();
 
-
   const router = createBrowserRouter([
     {
       path: '/',
+      element: ((currentUser === null) ? <Demo /> : <Home />),
+      errorElement: <NotFound />,
+    },
+    {
+      path: '/home',
       element: ((currentUser === null) ? <Demo /> : <Home />),
       errorElement: <NotFound />,
     },
@@ -37,7 +41,7 @@ function App() {
     },
     {
       path: '/dashboard',
-      element: <Dashboard />,
+      element: (<Dashboard />),
       errorElement: <NotFound />,
     },
     {

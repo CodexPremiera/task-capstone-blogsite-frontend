@@ -34,7 +34,7 @@ function Commenter( {commenter} ) {
 
           <div className={style.commenter_info}>
             <span className={style.commenter_name}> {`${commenter.Firstname} ${commenter.Lastname}`} </span>
-            <span className={style.commenter_desc}> {timeAgo(commenter.CommentDate)} </span>
+            <span className={style.commenter_desc}> {`${timeAgo(commenter.CommentDate)} ago`} </span>
           </div>
         </div>
 

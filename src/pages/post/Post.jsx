@@ -13,6 +13,7 @@ import Header from "../../components/header/Header.jsx";
 import Loading from "../../components/utils/Loading.jsx";
 import PostComment from "./comments/PostComment.jsx";
 import PostLike from "./likes/PostLike.jsx";
+import More from "./more/More.jsx";
 
 
 const Post = () => {
@@ -51,8 +52,8 @@ const Post = () => {
 
 
   const style = {
-    container: `flex flex-row max-w-[1336px] justify-evenly mx-auto`,
-    content: `flex flex-col max-w-[728px] min-h-[1080px] relative top-[57px] py-12 px-6 gap-8`,
+    container: `flex grow max-w-[1336px] justify-evenly mx-auto`,
+    content: `flex flex-col grow max-w-[728px] min-h-[1080px] relative top-[57px] py-12 px-6 gap-8`,
     article_title: `text-[2.5rem] text-[#242424] leading-[3rem] font-texts font-bold cursor-pointer mb-2`,
 
     author_bar: `flex align-center gap-3`,
@@ -70,7 +71,6 @@ const Post = () => {
     action_icon: `cursor-pointer hover:text-[#242424]`,
     save_icon: `h-[22px] w-[22px]`,
     share_icon: `h-[24px] w-[24px]`,
-    more_icon: `h-[24px] w-[24px]`,
 
     reads: `flex gap-2 items-center cursor-pointer hover:text-[#242424]`,
     read_icon: `h-[20px] w-[20px]`,
@@ -126,9 +126,7 @@ const Post = () => {
               <ShareIcon className={`${style.share_icon} ${style.action_icon}`}
                          onClick={() => {
                          }}/>
-              <MoreIcon className={`${style.more_icon} ${style.action_icon}`}
-                        onClick={() => {
-                        }}/>
+              <More post={post} />
             </div>
           </div>
 

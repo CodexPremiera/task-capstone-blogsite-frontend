@@ -13,7 +13,6 @@ const PostLikeModal = ({modal, setModal, post}) => {
 
   useEffect(() => {
     const getLikers = () => {
-      console.log(post)
       fetch(`http://localhost/capstone-blogsite/posts/post-likers.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

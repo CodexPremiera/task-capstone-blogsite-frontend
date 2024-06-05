@@ -2,7 +2,11 @@ import React, {useEffect, useState} from 'react'
 import Header from "../../components/header/Header.jsx";
 import {useCurrentUser} from "../../context/Context.jsx";
 import Loading from "../../components/utils/Loading.jsx";
-import DashboardContent from "./DashboardContent.jsx";
+import DashboardUserAccount from "./DashboardUserAccount.jsx";
+import NotFound from "../notFound/NotFound.jsx";
+import DashboardLikersCommenters from "./DashboardLikersCommenters.jsx";
+import DashboardAuthorCount from "./DashboardAuthorCount.jsx";
+import Statistics from "./Statistics.jsx";
 
 const Dashboard = () => {
   const currentUser = useCurrentUser();
@@ -13,7 +17,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost/capstone-blogsite/admins/admin.php?userAccountId=${userAccountId}`);
+        const response = await fetch(`http://localhost/capstone-blogsite/admin/admin.php?userAccountId=${userAccountId}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -32,15 +36,26 @@ const Dashboard = () => {
     fetchData();
   }, [userAccountId]);
 
-  if (loading) {
-    return <Loading />;
+  const style = {
+    container: `flex w-[100%]`,
+    content: `flex grow w-fit mx-auto justify-center pb-12`
   }
 
+  if (loading) return <Loading />;
+  if (!isAdmin) return <NotFound />;
   return (
     <div>
       <Header />
-      <main>
-        <DashboardContent isAdmin={isAdmin} />
+      <main className={style.container}>
+        <div className={style.content}>
+          <div>
+            <Statistics isAdmin={isAdmin} />
+            <DashboardUserAccount isAdmin={isAdmin}/>
+            <DashboardLikersCommenters isAdmin={isAdmin}/>
+            <DashboardAuthorCount isAdmin={isAdmin} />
+          </div>
+
+        </div>
       </main>
     </div>
   );

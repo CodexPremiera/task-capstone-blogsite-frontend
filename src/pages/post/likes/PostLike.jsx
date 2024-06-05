@@ -9,7 +9,6 @@ function PostLike( {post} ) {
   const [likeCountModal, setLikeCountModal] = useState(false);
   const [userHasLiked, setUserHasLiked] = useState(false);
   const { currentUser } = useCurrentUser();
-  const [isLoading, setIsLoading] = useState(true);
 
   const form = {
     postId: parseInt(post.ID_Post),
@@ -35,7 +34,6 @@ function PostLike( {post} ) {
         .then((data) => {
           if (data !== null) {
             setUserHasLiked(data.hasLiked === 'true');
-            setIsLoading(false);
           }
         })
         .catch((error) => {

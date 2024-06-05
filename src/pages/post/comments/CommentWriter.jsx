@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ProfilePic from "../../../assets/profile.jpg";
 import TextareaAutosize from "react-textarea-autosize";
 import useWindowResize from "../../../hooks/useWindowResize.js";
@@ -53,6 +53,7 @@ function CommentWriter( {setModal, post} ) {
 
     // check if all fields are entered
     if ( form.comment === "") {
+      console.log('form is empty');
       return;
     }
 

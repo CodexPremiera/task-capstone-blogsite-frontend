@@ -13,6 +13,7 @@ import {useCurrentUser} from "../../context/Context.jsx";
 const UserModal = ({ setModal }) => {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useCurrentUser();
+  const userIsAdmin = currentUser.UserType === 'Admin';
 
   // this logs the user out of the entire website
   const logout = () => {
@@ -36,11 +37,6 @@ const UserModal = ({ setModal }) => {
       title: "Stories",
       icon: <StoriesIcon />,
       path: "/stories",
-    },
-    {
-      title: "Stats",
-      icon: <StatsIcon />,
-      path: "/stats",
     },
   ];
 
@@ -72,6 +68,18 @@ const UserModal = ({ setModal }) => {
             <h2 className="text-md">{link.title}</h2>
           </Link>
         ))}
+
+        {userIsAdmin && (
+          <Link to={`/dashboard`}
+                className={style.menu_items}
+                onClick={() => setModal(false)}
+                key={4}>
+          <span className="text-2xl">
+            <StatsIcon />
+          </span>
+            <h2 className="text-md">Dashboard</h2>
+          </Link>
+        )}
       </div>
 
       <button className={style.sign_out} name={"btn_out"} onClick={logout}>
