@@ -46,8 +46,6 @@ function CommentWriter( {setModal, post} ) {
   }
 
   async function handlePublish (e) {
-    e.preventDefault();
-
     // trim the form fields
     form.comment = form.comment.trim();
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import ProfilePic from "../../../assets/profile.jpg";
-import {IoIosMore as MoreIcon} from "react-icons/io";
 import {PiHandsClappingThin as ClapIcon} from "react-icons/pi";
 import timeAgo from "../../../utils/timeAgo.js";
+import CommentMore from "./CommentMore.jsx";
 
 function Commenter( {commenter} ) {
 
@@ -38,7 +38,9 @@ function Commenter( {commenter} ) {
           </div>
         </div>
 
-        <MoreIcon className={`${style.more_icon} ${style.action_icon}`}/>
+        <CommentMore commenter={commenter}
+                     className={`${style.more_icon} 
+                     ${style.action_icon}`}/>
       </div>
 
       <div className={style.comment}>
